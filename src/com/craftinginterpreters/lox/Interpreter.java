@@ -210,12 +210,12 @@ class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             }
         }
 
+        environment.define(stmt.name.lexeme, null);
+
         if (stmt.superclass != null) {
             environment = new Environment(environment);
             environment.define("super", superclass);
         }
-
-        environment.define(stmt.name.lexeme, null);
 
         Map<String, LoxFunction> methods = new HashMap<>();
         for (Stmt.Function method : stmt.methods) {
